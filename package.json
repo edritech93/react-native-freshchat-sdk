@@ -1,0 +1,22 @@
+{
+    "name": "react-native-freshchat-sdk",
+    "version": "4.2.2",
+    "description": "A React Native module that allows you to use the native Freshchat SDK",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "freshchat",
+        "sdk",
+        "react",
+        "native",
+        "bridge",
+        "Android",
+        "module",
+        "iOS",
+        "Obj C",
+        "Swift"
+    ],
+    "license": "MIT"
+}
