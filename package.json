@@ -18,5 +18,8 @@
         "Obj C",
         "Swift"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {},
+    "repository": "https://github.com/edritech93/react-native-freshchat-sdk.git",
+    "author": "dicky <dicky.a@weefer.co.id>"
 }
