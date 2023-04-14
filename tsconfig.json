@@ -1,8 +1,6 @@
 {
-    "compilerOptions": {
-        "typeRoots": [
-            "./typings",
-            "./node_modules/@types/"
-          ]
-    }
+  "compilerOptions": {
+    "typeRoots": ["react-native", "./typings", "./node_modules/@types/"],
+    "jsx": "react"
+  }
 }
