@@ -1,17 +1,17 @@
 class FreshchatConfig {
-  public readonly appId: string;
-  public readonly appKey: string;
-  public domain: string | null = null;
-  public themeName: string | null = null;
-  public stringsBundle: any | null = null;
-  public teamMemberInfoVisible: boolean = true;
-  public cameraCaptureEnabled: boolean = true;
-  public gallerySelectionEnabled: boolean = true;
-  public fileSelectionEnabled: boolean = true;
-  public responseExpectationEnabled: boolean = true;
-  public errorLogsEnabled: boolean = true; // iOS only
-  public showNotificationBanner: boolean = true; // iOS only
-  public notificationSoundEnabled: boolean = true; // iOS only
+  readonly appId: string;
+  readonly appKey: string;
+  domain: string | null = null;
+  themeName: string | null = null;
+  stringsBundle: any | null = null;
+  teamMemberInfoVisible: boolean = true;
+  cameraCaptureEnabled: boolean = true;
+  gallerySelectionEnabled: boolean = true;
+  fileSelectionEnabled: boolean = true;
+  responseExpectationEnabled: boolean = true;
+  errorLogsEnabled: boolean = true; // iOS only
+  showNotificationBanner: boolean = true; // iOS only
+  notificationSoundEnabled: boolean = true; // iOS only
 
   constructor(appId: string, appKey: string) {
     this.appId = appId;

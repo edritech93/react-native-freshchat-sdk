@@ -1,9 +1,9 @@
 class FreshchatMessage {
-  public tag: string | null = null;
-  public message: string | null = null;
+  tag: string | null = null;
+  message: string | null = null;
 
   constructor() {
-    Object.preventExtensions(this);
+    Object.seal(this);
   }
 }
 

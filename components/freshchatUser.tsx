@@ -1,9 +1,9 @@
 class FreshchatUser {
-  public email: string | null = null;
-  public firstName: string | null = null;
-  public lastName: string | null = null;
-  public phone: string | null = null;
-  public phoneCountryCode: string | null = null;
+  email: string | null = null;
+  firstName: string | null = null;
+  lastName: string | null = null;
+  phone: string | null = null;
+  phoneCountryCode: string | null = null;
 
   private static instance: FreshchatUser = new FreshchatUser();
 

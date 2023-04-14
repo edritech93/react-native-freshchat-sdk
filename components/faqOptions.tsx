@@ -15,22 +15,22 @@ const FilterType = {
 };
 
 class FaqOptions {
-  public showFaqCategoriesAsGrid: boolean = true;
-  public showContactUsOnFaqScreens: boolean = true;
-  public showContactUsOnAppBar: boolean = false;
-  public showContactUsOnFaqNotHelpful: boolean = true;
-  public tags: string[] | null = null;
-  public contactusFilterTags: string[] | null = null;
-  public contactusFilterTitle: string | null = null;
-  public filteredViewTitle: string | null = null;
-  public filterType: string | null = null;
-
-  public static get FilterType() {
-    return FilterType;
-  }
+  showFaqCategoriesAsGrid: boolean = true;
+  showContactUsOnFaqScreens: boolean = true;
+  showContactUsOnAppBar: boolean = false;
+  showContactUsOnFaqNotHelpful: boolean = true;
+  tags: string[] | null = null;
+  contactusFilterTags: string[] | null = null;
+  contactusFilterTitle: string | null = null;
+  filteredViewTitle: string | null = null;
+  filterType: string | null = null;
 
   constructor() {
     Object.preventExtensions(this);
+  }
+
+  static get FilterType() {
+    return FilterType;
   }
 }
 

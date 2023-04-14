@@ -1,25 +1,43 @@
 {
-    "name": "react-native-freshchat-sdk",
-    "version": "4.2.2",
-    "description": "A React Native module that allows you to use the native Freshchat SDK",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-        "freshchat",
-        "sdk",
-        "react",
-        "native",
-        "bridge",
-        "Android",
-        "module",
-        "iOS",
-        "Obj C",
-        "Swift"
-    ],
-    "license": "MIT",
-    "dependencies": {},
-    "repository": "https://github.com/edritech93/react-native-freshchat-sdk.git",
-    "author": "dicky <dicky.a@weefer.co.id>"
+  "name": "react-native-freshchat-sdk",
+  "version": "4.2.2",
+  "description": "A React Native module that allows you to use the native Freshchat SDK",
+  "main": "index.js",
+  "files": [
+    "!**/__tests__"
+  ],
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "freshchat",
+    "sdk",
+    "react",
+    "native",
+    "bridge",
+    "Android",
+    "module",
+    "iOS",
+    "Obj C",
+    "Swift"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/runtime": "^7.21.0",
+    "@types/jest": "^29.5.0",
+    "@types/react-native": "^0.71.5",
+    "babel-jest": "^29.5.0",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "jest": "^29.5.0",
+    "metro-react-native-babel-preset": "^0.76.1",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.4"
+  },
+  "repository": "https://github.com/edritech93/react-native-freshchat-sdk.git",
+  "author": "dicky <dicky.a@weefer.co.id>",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.21.4"
+  }
 }
