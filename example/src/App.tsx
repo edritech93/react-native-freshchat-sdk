@@ -6,7 +6,7 @@ import {StyleSheet, View, Text, Button} from 'react-native';
 export default function App() {
   const [isTimeAuto, setIsTimeAuto] = React.useState<string>('');
   // const priority = FreshchatNotificationConfig.getNotificationPriority();
-  console.log(tes); // should log 1
+  // console.log(tes); // should log 1
   return (
     <View style={styles.container}>
       <Text>Time Auto: {isTimeAuto.toString()}</Text>
