@@ -1,12 +1,5 @@
 import { NativeModules } from "react-native";
 
-interface RNFreshchatSdk {
-  FilterType: {
-    CATEGORY: string;
-    ARTICLE: string;
-  };
-}
-
 const { RNFreshchatSdk } = NativeModules;
 
 const FilterType = {

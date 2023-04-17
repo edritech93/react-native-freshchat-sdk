@@ -9,6 +9,8 @@ export enum NotificationPriority {
   PRIORITY_MIN = RNFreshchatSdk.NotificationPriority.PRIORITY_MIN,
 }
 
+export const tes = "tesss";
+
 export enum NotificationImportance {
   NONE = RNFreshchatSdk.NotificationImportance.NONE,
   MIN = RNFreshchatSdk.NotificationImportance.MIN,

@@ -3,12 +3,14 @@
   "version": "4.2.2",
   "description": "A React Native module that allows you to use the native Freshchat SDK",
   "main": "index.js",
+  "react-native": "src/index",
+  "source": "src/index",
   "files": [
     "!**/__tests__"
   ],
   "scripts": {
     "test": "jest",
-    "example": "yarn --cwd example"
+    "example": "cd example && yarn start"
   },
   "keywords": [
     "freshchat",

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4915B2180720B2EE6654CCA9 /* Pods_RNFreshchatSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FFB2B0E801AED4078A7271 /* Pods_RNFreshchatSdk.framework */; };
 		B3E7B58A1CC2AC0600A0062D /* RNFreshchatSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNFreshchatSdk.m */; };
 /* End PBXBuildFile section */
 
@@ -24,8 +25,11 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNFreshchatSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNFreshchatSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F3164DCE14B741F61418485 /* Pods-RNFreshchatSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFreshchatSdk.release.xcconfig"; path = "Target Support Files/Pods-RNFreshchatSdk/Pods-RNFreshchatSdk.release.xcconfig"; sourceTree = "<group>"; };
+		984D45C35C20E417DFE5C78B /* Pods-RNFreshchatSdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNFreshchatSdk.debug.xcconfig"; path = "Target Support Files/Pods-RNFreshchatSdk/Pods-RNFreshchatSdk.debug.xcconfig"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNFreshchatSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNFreshchatSdk.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNFreshchatSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNFreshchatSdk.m; sourceTree = "<group>"; };
+		F5FFB2B0E801AED4078A7271 /* Pods_RNFreshchatSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNFreshchatSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4915B2180720B2EE6654CCA9 /* Pods_RNFreshchatSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +58,27 @@
 				B3E7B5881CC2AC0600A0062D /* RNFreshchatSdk.h */,
 				B3E7B5891CC2AC0600A0062D /* RNFreshchatSdk.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
+				F72EF8F646E3006B0272ED16 /* Pods */,
+				F950320E6E3CC2619098C3BB /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		F72EF8F646E3006B0272ED16 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				984D45C35C20E417DFE5C78B /* Pods-RNFreshchatSdk.debug.xcconfig */,
+				2F3164DCE14B741F61418485 /* Pods-RNFreshchatSdk.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F950320E6E3CC2619098C3BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5FFB2B0E801AED4078A7271 /* Pods_RNFreshchatSdk.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -63,6 +88,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNFreshchatSdk" */;
 			buildPhases = (
+				C15EB61E0FB5277B4CC10375 /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
 				58B511D91A9E6C8500147676 /* CopyFiles */,
@@ -107,6 +133,31 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C15EB61E0FB5277B4CC10375 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RNFreshchatSdk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
@@ -203,6 +254,7 @@
 		};
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 984D45C35C20E417DFE5C78B /* Pods-RNFreshchatSdk.debug.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -220,6 +272,7 @@
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F3164DCE14B741F61418485 /* Pods-RNFreshchatSdk.release.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

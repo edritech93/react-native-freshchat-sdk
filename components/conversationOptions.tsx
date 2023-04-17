@@ -4,13 +4,10 @@ interface ConversationOptionsProps {
 }
 
 class ConversationOptions {
-  public tags: string[] | null;
-  public filteredViewTitle: string | null;
-
-  constructor(props: ConversationOptionsProps) {
-    this.tags = props.tags;
-    this.filteredViewTitle = props.filteredViewTitle;
-
+  constructor(
+    public tags: string[] | null,
+    public filteredViewTitle: string | null
+  ) {
     Object.preventExtensions(this);
   }
 }
