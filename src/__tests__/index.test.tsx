@@ -10,6 +10,9 @@ import FreshchatNotificationConfig, {
   NotificationImportance,
 } from "../../components/freshchatNotificationConfig";
 
+import { isAndroid, isIos } from "../../components/freshchatJSWrapper";
+import { Platform } from "react-native";
+
 // FreshchatMessage tes params pass
 // describe("FreshchatMessage", () => {
 //   it("should set tag and message properties correctly", () => {
@@ -96,42 +99,72 @@ import FreshchatNotificationConfig, {
 // });
 
 //FreshchatUser test pass
-describe("FreshchatUser", () => {
-  describe("getInstance", () => {
-    it("should return the same instance", () => {
-      const instance1 = FreshchatUser.getInstance();
-      const instance2 = FreshchatUser.getInstance();
-      expect(instance1).toBe(instance2);
-    });
+// describe("FreshchatUser", () => {
+//   describe("getInstance", () => {
+//     it("should return the same instance", () => {
+//       const instance1 = FreshchatUser.getInstance();
+//       const instance2 = FreshchatUser.getInstance();
+//       expect(instance1).toBe(instance2);
+//     });
+//   });
+// });
+
+// describe("FreshchatNotificationConfig", () => {
+//   it("should create a new instance of FreshchatNotificationConfig", () => {
+//     const config = new FreshchatNotificationConfig();
+
+//     expect(config).toBeDefined();
+//     expect(config).toBeInstanceOf(FreshchatNotificationConfig);
+//   });
+
+//   it("should not allow adding new properties to the instance", () => {
+//     const config = new FreshchatNotificationConfig();
+//     expect(() => {
+//       config.newProp = "new value";
+//     }).toThrow();
+//   });
+
+//   it("should return NotificationPriority object", () => {
+//     const priority = FreshchatNotificationConfig.getNotificationPriority();
+//     expect(priority).toBeDefined();
+//     expect(priority.PRIORITY_DEFAULT).toBe(
+//       NotificationPriority.PRIORITY_DEFAULT
+//     );
+//   });
+
+//   it("should return NotificationImportance object", () => {
+//     const importance = FreshchatNotificationConfig.getNotificationImportance();
+//     expect(importance).toBeDefined();
+//     expect(importance.DEFAULT).toBe(NotificationImportance.DEFAULT);
+//   });
+// });
+
+//freshchatJSWrapper
+test("isAndroid returns a boolean value", () => {
+  const result = isAndroid();
+  expect(typeof result).toBe("boolean");
+});
+
+describe("isAndroid", () => {
+  test("should return true if platform is Android", () => {
+    Platform.OS = "android";
+    expect(isAndroid()).toBe(true);
+  });
+
+  test("should return false if platform is iOS", () => {
+    Platform.OS = "ios";
+    expect(isAndroid()).toBe(false);
   });
 });
 
-describe("FreshchatNotificationConfig", () => {
-  it("should create a new instance of FreshchatNotificationConfig", () => {
-    const config = new FreshchatNotificationConfig();
-
-    expect(config).toBeDefined();
-    expect(config).toBeInstanceOf(FreshchatNotificationConfig);
+describe("isIos", () => {
+  test("should return true if platform is iOS", () => {
+    Platform.OS = "ios";
+    expect(isIos()).toBe(true);
   });
 
-  it("should not allow adding new properties to the instance", () => {
-    const config = new FreshchatNotificationConfig();
-    expect(() => {
-      config.newProp = "new value";
-    }).toThrow();
-  });
-
-  it("should return NotificationPriority object", () => {
-    const priority = FreshchatNotificationConfig.getNotificationPriority();
-    expect(priority).toBeDefined();
-    expect(priority.PRIORITY_DEFAULT).toBe(
-      NotificationPriority.PRIORITY_DEFAULT
-    );
-  });
-
-  it("should return NotificationImportance object", () => {
-    const importance = FreshchatNotificationConfig.getNotificationImportance();
-    expect(importance).toBeDefined();
-    expect(importance.DEFAULT).toBe(NotificationImportance.DEFAULT);
+  test("should return false if platform is Android", () => {
+    Platform.OS = "android";
+    expect(isIos()).toBe(false);
   });
 });

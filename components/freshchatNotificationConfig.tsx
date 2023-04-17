@@ -1,7 +1,7 @@
 import { NativeModules } from "react-native";
 const { RNFreshchatSdk } = NativeModules;
 
-enum NotificationPriority {
+export enum NotificationPriority {
   PRIORITY_DEFAULT = RNFreshchatSdk.NotificationPriority.PRIORITY_DEFAULT,
   PRIORITY_HIGH = RNFreshchatSdk.NotificationPriority.PRIORITY_HIGH,
   PRIORITY_LOW = RNFreshchatSdk.NotificationPriority.PRIORITY_LOW,
@@ -9,7 +9,7 @@ enum NotificationPriority {
   PRIORITY_MIN = RNFreshchatSdk.NotificationPriority.PRIORITY_MIN,
 }
 
-enum NotificationImportance {
+export enum NotificationImportance {
   NONE = RNFreshchatSdk.NotificationImportance.NONE,
   MIN = RNFreshchatSdk.NotificationImportance.MIN,
   LOW = RNFreshchatSdk.NotificationImportance.LOW,

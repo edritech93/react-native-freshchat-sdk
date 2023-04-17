@@ -1,8 +1,6 @@
 import { NativeEventEmitter, NativeModules, Platform } from "react-native";
+import { version } from "../package.json";
 import {
-  ConversationOptionsType,
-  FAQOptionsType,
-  FreshchatConfigType,
   FreshchatMessageType,
   FreshchatNotificationConfigType,
 } from "../types/FreshchatJSWrapperType";
@@ -23,47 +21,49 @@ const sdk_version_placeholder =
   "-" +
   platform_sdk_version_placeholder;
 
-const isAndroid = function () {
+const _eventHandlers = {};
+
+export const isAndroid = () => {
   return !isIos();
 };
 
-const isIos = function () {
+export const isIos = () => {
   return Platform.OS === "ios";
 };
 
-const registerForRestoreIdUpdates = (register: boolean) => {
+export const registerForRestoreIdUpdates = (register: boolean) => {
   RNFreshchatSdk.registerForRestoreIdUpdates(register);
 };
 
-const registerForMessageCountUpdates = (register: boolean) => {
+export const registerForMessageCountUpdates = (register: boolean) => {
   RNFreshchatSdk.registerForMessageCountUpdates(register);
 };
 
-const registerUserInteractionListerner = (register: boolean) => {
+export const registerUserInteractionListerner = (register: boolean) => {
   RNFreshchatSdk.registerUserInteractionListerner(register);
 };
 
-const registerForOpeningLink = (register: boolean) => {
+export const registerForOpeningLink = (register: boolean) => {
   RNFreshchatSdk.registerForOpeningLink(register);
 };
 
-const registerForLocaleChangedByWebview = (register: boolean) => {
+export const registerForLocaleChangedByWebview = (register: boolean) => {
   RNFreshchatSdk.registerForOpeningLink(register);
 };
 
-const registerForUserActions = (register: boolean) => {
+export const registerForUserActions = (register: boolean) => {
   RNFreshchatSdk.registerForUserActions(register);
 };
 
-const registerNotificationClickListener = (register: boolean) => {
+export const registerNotificationClickListener = (register: boolean) => {
   RNFreshchatSdk.registerNotificationClickListener(register);
 };
 
-const registerForJWTRefresh = (register: boolean) => {
+export const registerForJWTRefresh = (register: boolean) => {
   RNFreshchatSdk.registerForJWTRefresh(register);
 };
 
-const enableNativeListenerForType = (type: string, enable: boolean) => {
+export const enableNativeListenerForType = (type: string, enable: boolean) => {
   switch (type) {
     case RNFreshchatSdk.ACTION_UNREAD_MESSAGE_COUNT_CHANGED:
       registerForMessageCountUpdates(enable);
@@ -92,7 +92,7 @@ const enableNativeListenerForType = (type: string, enable: boolean) => {
   }
 };
 
-const eventsList = (key: string) => {
+export const eventsList = (key: string) => {
   let events = {
     EVENT_EXTERNAL_LINK_CLICKED: RNFreshchatSdk.ACTION_OPEN_LINKS,
     EVENT_LOCALE_CHANGED_BY_WEBVIEW:
@@ -111,232 +111,241 @@ const eventsList = (key: string) => {
   return events[key];
 };
 
-module.exports = {
-  // List of Freshchat events
-  EVENT_EXTERNAL_LINK_CLICKED: eventsList("EVENT_EXTERNAL_LINK_CLICKED"),
-  EVENT_ANDROID_LOCALE_CHANGED_BY_WEBVIEW: eventsList(
-    "EVENT_LOCALE_CHANGED_BY_WEBVIEW"
-  ),
-  EVENT_UNREAD_MESSAGE_COUNT_CHANGED: eventsList(
-    "EVENT_UNREAD_MESSAGE_COUNT_CHANGED"
-  ),
-  EVENT_USER_RESTORE_ID_GENERATED: eventsList(
-    "EVENT_USER_RESTORE_ID_GENERATED"
-  ),
-  EVENT_USER_INTERACTED: eventsList("EVENT_USER_INTERACTED"),
-  FRESHCHAT_EVENTS: eventsList("FRESHCHAT_EVENTS"),
-  FRESHCHAT_NOTIFICATION_CLICKED: eventsList("FRESHCHAT_NOTIFICATION_CLICKED"),
-  EVENT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES: eventsList(
-    "EVENT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES"
-  ),
+export const EVENT_EXTERNAL_LINK_CLICKED = eventsList(
+  "EVENT_EXTERNAL_LINK_CLICKED"
+);
+export const EVENT_ANDROID_LOCALE_CHANGED_BY_WEBVIEW = eventsList(
+  "EVENT_LOCALE_CHANGED_BY_WEBVIEW"
+);
+export const EVENT_UNREAD_MESSAGE_COUNT_CHANGED = eventsList(
+  "EVENT_UNREAD_MESSAGE_COUNT_CHANGED"
+);
+export const EVENT_USER_RESTORE_ID_GENERATED = eventsList(
+  "EVENT_USER_RESTORE_ID_GENERATED"
+);
+export const EVENT_USER_INTERACTED = eventsList("EVENT_USER_INTERACTED");
+export const FRESHCHAT_EVENTS = eventsList("FRESHCHAT_EVENTS");
+export const FRESHCHAT_NOTIFICATION_CLICKED = eventsList(
+  "FRESHCHAT_NOTIFICATION_CLICKED"
+);
+export const EVENT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES = eventsList(
+  "EVENT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES"
+);
 
-  init: (freshchatConfig: FreshchatConfigType) =>
-    RNFreshchatSdk.init(freshchatConfig),
+export const init = (freshchatConfig) => RNFreshchatSdk.init(freshchatConfig);
 
-  showFAQs: (faqOptions: FAQOptionsType) => {
-    if (faqOptions) {
-      RNFreshchatSdk.showFAQsWithOptions(faqOptions);
-    } else {
-      RNFreshchatSdk.showFAQs();
-    }
-  },
-  showConversations: (conversationOptions: ConversationOptionsType) => {
-    if (conversationOptions) {
-      RNFreshchatSdk.showConversationsWithOptions(conversationOptions);
-    } else {
-      RNFreshchatSdk.showConversations();
-    }
-  },
-
-  resetUser: () => {
-    RNFreshchatSdk.resetUser();
-  },
-
-  getUnreadCountAsync: (callback, tags) => {
-    try {
-      if (tags) {
-        RNFreshchatSdk.getUnreadCountAsyncForTags(callback, tags);
-      } else {
-        RNFreshchatSdk.getUnreadCountAsync(callback);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  },
-
-  setUser: (user, errorCallback) => {
-    RNFreshchatSdk.setUser(user, errorCallback);
-  },
-
-  setUserWithIdToken: (jwt: string, errorCallback) => {
-    if (isAndroid()) {
-      RNFreshchatSdk.setUserWithIdToken(jwt, errorCallback);
-    } else {
-      RNFreshchatSdk.setUserWithIdToken(jwt);
-    }
-  },
-
-  getUser: (callback) => {
-    RNFreshchatSdk.getUser(callback);
-  },
-
-  getSDKVersionCode: (callback) => {
-    RNFreshchatSdk.getSDKVersionCode((native_sdk_version) => {
-      var platformName = "";
-      if (isAndroid()) {
-        platformName = android_platform_name;
-      } else {
-        platformName = ios_platform_name;
-      }
-
-      var reactNativeVersion = sdk_version_placeholder;
-      reactNativeVersion = reactNativeVersion.replace(
-        rn_sdk_version_placeholder,
-        version
-      );
-      reactNativeVersion = reactNativeVersion.replace(
-        platform_name_placeholder,
-        platformName
-      );
-      reactNativeVersion = reactNativeVersion.replace(
-        platform_sdk_version_placeholder,
-        native_sdk_version
-      );
-
-      callback(reactNativeVersion);
-    });
-  },
-
-  setUserProperties: (userProperties, errorCallback) => {
-    RNFreshchatSdk.setUserProperties(userProperties, errorCallback);
-  },
-
-  sendMessage: (freshchatMessage: FreshchatMessageType) => {
-    RNFreshchatSdk.sendMessage(freshchatMessage);
-  },
-
-  identifyUser: (externalId: string, restoreId: string, errorCallback) => {
-    RNFreshchatSdk.identifyUser(externalId, restoreId, errorCallback);
-  },
-
-  restoreUserWithIdToken: (jwt: string, errorCallback) => {
-    if (isAndroid()) {
-      RNFreshchatSdk.restoreUser(jwt, errorCallback);
-    } else {
-      RNFreshchatSdk.restoreUser(jwt);
-    }
-  },
-
-  getUserIdTokenStatus: (callback) => {
-    RNFreshchatSdk.getUserIdTokenStatus(callback);
-  },
-
-  getFreshchatUserId: (callback: (userId: string) => void): void => {
-    RNFreshchatSdk.getFreshchatUserId(callback);
-  },
-
-  /**
-   * Function to dismiss Freshchat SDK screens
-   *
-   * @since 0.4.5
-   */
-  dismissFreshchatViews: () => {
-    RNFreshchatSdk.dismissFreshchatViews();
-  },
-
-  setNotificationConfig: (
-    freshchatNotificationConfig: FreshchatNotificationConfigType
-  ) => {
-    RNFreshchatSdk.setNotificationConfig(freshchatNotificationConfig);
-  },
-
-  setPushRegistrationToken: (token) => {
-    RNFreshchatSdk.setPushRegistrationToken(token);
-  },
-
-  isFreshchatNotification: (payload, callback) => {
-    RNFreshchatSdk.isFreshchatNotification(payload, callback);
-  },
-
-  handlePushNotification: (payload: { message: any }) => {
-    RNFreshchatSdk.handlePushNotification(payload);
-  },
-
-  openFreshchatDeeplink: (link) => {
-    RNFreshchatSdk.openFreshchatDeeplink(link);
-  },
-
-  trackEvent: (name: string, properties) => {
-    RNFreshchatSdk.trackEvent(name, properties);
-  },
-
-  notifyAppLocaleChange: () => {
-    RNFreshchatSdk.notifyAppLocaleChange();
-  },
-
-  addEventListener: (type, handler) => {
-    const listener = emitter.addListener(type, handler);
-
-    let shouldStartNativeListener = false;
-    if (!_eventHandlers[type]) {
-      _eventHandlers[type] = new Map();
-      shouldStartNativeListener = true;
-    }
-
-    _eventHandlers[type].set(handler, listener);
-    if (shouldStartNativeListener) {
-      enableNativeListenerForType(type, true);
-    }
-  },
-
-  // removeEventListener: function (type, handler) {
-  //     if (!_eventHandlers[type].has(handler)) {
-  //         return;
-  //     }
-  //     _eventHandlers[type].get(handler).remove();
-  //     _eventHandlers[type].delete(handler);
-  //
-  //     if (_eventHandlers[type].size === 0) {
-  //         _eventHandlers[type] = undefined;
-  //         enableNativeListenerForType(type, false);
-  //     }
-  // },
-
-  removeEventListeners: (type) => {
-    if (!_eventHandlers[type]) {
-      return;
-    }
-
-    var eventSubscriptionsMap = _eventHandlers[type];
-    if (eventSubscriptionsMap) {
-      eventSubscriptionsMap.forEach((subscription) => {
-        if (subscription) {
-          subscription.remove();
-        }
-      });
-    }
-    _eventHandlers[type] = undefined;
-    enableNativeListenerForType(type, false);
-  },
-
-  transformPushNotificationIOSPayloadToNativePayload: (reactPayload) => {
-    var nativePayload = reactPayload._data;
-
-    var load = {
-      alert: reactPayload._alert,
-      badge: reactPayload._badgeCount,
-      sound: "default",
-    };
-    var apsPayload = { aps: load };
-    var payload = Object.assign({}, apsPayload, nativePayload);
-    return payload;
-  },
-
-  // isAppActiveWhenReceivingNotification: function (nativePayload) {
-  //     if (nativePayload.isActive !== undefined) {
-  //         return nativePayload.isActive;
-  //     } else {
-  //         return false;
-  //     }
-  // },
+export const showFAQs = (faqOptions) => {
+  if (faqOptions) {
+    RNFreshchatSdk.showFAQsWithOptions(faqOptions);
+  } else {
+    RNFreshchatSdk.showFAQs();
+  }
 };
+
+export const showConversations = (conversationOptions) => {
+  if (conversationOptions) {
+    RNFreshchatSdk.showConversationsWithOptions(conversationOptions);
+  } else {
+    RNFreshchatSdk.showConversations();
+  }
+};
+
+export const resetUser = () => {
+  RNFreshchatSdk.resetUser();
+};
+
+export const getUnreadCountAsync = (callback, tags) => {
+  try {
+    if (tags) {
+      RNFreshchatSdk.getUnreadCountAsyncForTags(callback, tags);
+    } else {
+      RNFreshchatSdk.getUnreadCountAsync(callback);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const setUser = (user, errorCallback) => {
+  RNFreshchatSdk.setUser(user, errorCallback);
+};
+
+export const setUserWithIdToken = (jwt, errorCallback) => {
+  if (isAndroid()) {
+    RNFreshchatSdk.setUserWithIdToken(jwt, errorCallback);
+  } else {
+    RNFreshchatSdk.setUserWithIdToken(jwt);
+  }
+};
+
+export const getUser = (callback) => {
+  RNFreshchatSdk.getUser(callback);
+};
+
+export const getSDKVersionCode = (callback) => {
+  RNFreshchatSdk.getSDKVersionCode((native_sdk_version) => {
+    let platformName = "";
+    if (isAndroid()) {
+      platformName = android_platform_name;
+    } else {
+      platformName = ios_platform_name;
+    }
+
+    let reactNativeVersion = sdk_version_placeholder;
+    reactNativeVersion = reactNativeVersion.replace(
+      rn_sdk_version_placeholder,
+      version
+    );
+    reactNativeVersion = reactNativeVersion.replace(
+      platform_name_placeholder,
+      platformName
+    );
+    reactNativeVersion = reactNativeVersion.replace(
+      platform_sdk_version_placeholder,
+      native_sdk_version
+    );
+
+    callback(reactNativeVersion);
+  });
+};
+export const setUserProperties = (userProperties, errorCallback) => {
+  RNFreshchatSdk.setUserProperties(userProperties, errorCallback);
+};
+
+export const sendMessage = (freshchatMessage: FreshchatMessageType) => {
+  RNFreshchatSdk.sendMessage(freshchatMessage);
+};
+
+export const identifyUser = (
+  externalId: string,
+  restoreId: string,
+  errorCallback
+) => {
+  RNFreshchatSdk.identifyUser(externalId, restoreId, errorCallback);
+};
+
+export const restoreUserWithIdToken = (jwt: string, errorCallback) => {
+  if (isAndroid()) {
+    RNFreshchatSdk.restoreUser(jwt, errorCallback);
+  } else {
+    RNFreshchatSdk.restoreUser(jwt);
+  }
+};
+
+export const getUserIdTokenStatus = (callback) => {
+  RNFreshchatSdk.getUserIdTokenStatus(callback);
+};
+
+export const getFreshchatUserId = (
+  callback: (userId: string) => void
+): void => {
+  RNFreshchatSdk.getFreshchatUserId(callback);
+};
+
+/**
+ * Function to dismiss Freshchat SDK screens
+ *
+ * @since 0.4.5
+ */
+export const dismissFreshchatViews = () => {
+  RNFreshchatSdk.dismissFreshchatViews();
+};
+
+export const setNotificationConfig = (
+  freshchatNotificationConfig: FreshchatNotificationConfigType
+) => {
+  RNFreshchatSdk.setNotificationConfig(freshchatNotificationConfig);
+};
+
+export const setPushRegistrationToken = (token: string) => {
+  RNFreshchatSdk.setPushRegistrationToken(token);
+};
+
+export const isFreshchatNotification = (payload, callback) => {
+  RNFreshchatSdk.isFreshchatNotification(payload, callback);
+};
+
+export const handlePushNotification = (payload: { message: any }) => {
+  RNFreshchatSdk.handlePushNotification(payload);
+};
+
+export const openFreshchatDeeplink = (link: string) => {
+  RNFreshchatSdk.openFreshchatDeeplink(link);
+};
+
+export const trackEvent = (name: string, properties) => {
+  RNFreshchatSdk.trackEvent(name, properties);
+};
+
+export const notifyAppLocaleChange = () => {
+  RNFreshchatSdk.notifyAppLocaleChange();
+};
+
+//error
+export const addEventListener = (type, handler) => {
+  const listener = emitter.addListener(type, handler);
+
+  let shouldStartNativeListener = false;
+  if (!_eventHandlers[type]) {
+    _eventHandlers[type] = new Map();
+    shouldStartNativeListener = true;
+  }
+
+  _eventHandlers[type].set(handler, listener);
+  if (shouldStartNativeListener) {
+    enableNativeListenerForType(type, true);
+  }
+};
+
+// removeEventListener: function (type, handler) {
+//     if (!_eventHandlers[type].has(handler)) {
+//         return;
+//     }
+//     _eventHandlers[type].get(handler).remove();
+//     _eventHandlers[type].delete(handler);
+//
+//     if (_eventHandlers[type].size === 0) {
+//         _eventHandlers[type] = undefined;
+//         enableNativeListenerForType(type, false);
+//     }
+// },
+
+export const removeEventListeners = (type) => {
+  if (!_eventHandlers[type]) {
+    return;
+  }
+
+  var eventSubscriptionsMap = _eventHandlers[type];
+  if (eventSubscriptionsMap) {
+    eventSubscriptionsMap.forEach((subscription) => {
+      if (subscription) {
+        subscription.remove();
+      }
+    });
+  }
+  _eventHandlers[type] = undefined;
+  enableNativeListenerForType(type, false);
+};
+
+export const transformPushNotificationIOSPayloadToNativePayload = (
+  reactPayload
+) => {
+  var nativePayload = reactPayload._data;
+
+  var load = {
+    alert: reactPayload._alert,
+    badge: reactPayload._badgeCount,
+    sound: "default",
+  };
+  var apsPayload = { aps: load };
+  var payload = Object.assign({}, apsPayload, nativePayload);
+  return payload;
+};
+
+// isAppActiveWhenReceivingNotification: function (nativePayload) {
+//     if (nativePayload.isActive !== undefined) {
+//         return nativePayload.isActive;
+//     } else {
+//         return false;
+//     }
+// },
