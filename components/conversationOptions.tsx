@@ -1,9 +1,4 @@
-interface ConversationOptionsProps {
-  tags: string[] | null;
-  filteredViewTitle: string | null;
-}
-
-class ConversationOptions {
+export default class ConversationOptions {
   constructor(
     public tags: string[] | null,
     public filteredViewTitle: string | null
@@ -11,5 +6,3 @@ class ConversationOptions {
     Object.preventExtensions(this);
   }
 }
-
-export default ConversationOptions;

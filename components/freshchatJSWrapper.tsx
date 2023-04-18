@@ -150,7 +150,7 @@ export const showConversations = (conversationOptions) => {
   }
 };
 
-export const resetUser = () => {
+export const resetUserInfo = () => {
   RNFreshchatSdk.resetUser();
 };
 
